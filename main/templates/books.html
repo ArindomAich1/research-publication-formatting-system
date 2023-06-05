@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./static/form.css">
+    <title>Books</title>
+</head>
+<body>
+    <h1>Books</h1>
+    <form action="/bookadded" method="post">
+        <label for="title">Title:</label>
+        <input type="text" name="title" placeholder="title">
+        <br><br>
+        <label>Author 1:</label>
+        <input type="text" name="author1fname" placeholder="author1 first name">
+        <input type="text" name="author1lname" placeholder="author1 last name">
+        <br><br>
+        <label>Author 2:</label>
+        <input type="text" name="author2fname" placeholder="author2 first name">
+        <input type="text" name="author2lname" placeholder="author2 last name">
+        <br><br>
+        <label>Author 3:</label>
+        <input type="text" name="author3fname" placeholder="author3 first name">
+        <input type="text" name="author3lname" placeholder="author3 last name">
+        <br><br>
+        <label>Author 4:</label>
+        <input type="text" name="author4fname" placeholder="author4 first name">
+        <input type="text" name="author4lname" placeholder="author4 last name">
+        <br><br>
+        <label for="edition">Edition:</label>
+        <input type="number" name="edition" placeholder="edition">
+        <br><br>
+        <label for="volume">Volume:</label>
+        <input type="text" name="volume" placeholder="volume (eg. 1 or 1-5)">
+        <br><br>
+        <label for="dop">Date of Publishing:</label>
+        <input type="number" name="dd" placeholder="dd">-
+        <input type="number" name="mm" placeholder="mm">-
+        <input type="number" name="yyyy" placeholder="yyyy">
+        <br><br>
+        <label for="publisher">Publisher:</label>
+        <input type="text" name="publisher" placeholder="publisher">
+        <br><br>
+        <label for="countryOfPublication">Country of Publication:</label>
+        <input type="text" name="countryOfPublication" placeholder="country of publication">
+        <br><br>
+        <label for="stateOfPublication">State of Publication:</label>
+        <input type="text" name="stateOfPublication" placeholder="state of publication">
+        <br><br>
+        <label for="cityOfPublication">City of Publication:</label>
+        <input type="text" name="cityOfPublication" placeholder="city of publication">
+        <br><br>
+        <label for="doi">Database Object Identifier:</label>
+        <input type="text" name="doi" placeholder="doi">
+        <br><br>
+        <label for="url">URL:</label>
+        <input type="text" name="url" placeholder="url">
+        <br><br>
+        <label for="isbn">ISBN:</label>
+        <input type="number" name="isbn" placeholder="isbn">
+        <br><br>
+        <label for="issn">ISSN:</label>
+        <input type="number" name="issn" placeholder="issn">
+        <br><br>
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>

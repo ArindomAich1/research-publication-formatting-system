@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <a href="/webpage">Webpage</a>
+    <a href="/books">Books</a>
+    <a href="/journalArticle">Journal article</a>
+    <div style="padding-top: 20px ;">
+        <!-- <form id="myForm" method="get">
+            <textarea name="myInput" id="myInput" cols="100" rows="5" style=" border-radius: 5px; border-bottom: solid; background-color: rgb(232, 244, 255);"></textarea> 
+            <input type="text" x-webkit-speech id="myInput" style="width: 70%; border-radius: 5px; border-bottom: solid; background-color: rgb(232, 244, 255); ">
+            <br>
+            <input type="submit" style="border: solid;">
+        </form>
+        <br> -->
+        <!-- <fieldset style="border: 2px solid; width: 300px; padding: 20px; margin: 0 auto;">
+            <div style="display: flex; justify-content: center;">
+                <div id="book" onclick="fieldFormatting('book')" style="display: flex; align-items: center; cursor: pointer; height: 100px; width: 100px; background-color: aqua; border: 2px solid; border-radius: 10px; margin:0px 5px ;">
+                    <div style="margin: auto;">
+                        Book
+                    </div>
+                </div>
+                <br>
+                <div id="chapter" onclick="fieldFormatting('chapter')" style="display: flex; align-items: center; cursor: pointer; height: 100px; width: 100px; background-color: aqua; border: 2px solid; border-radius: 10px; margin:0px 5px ;">
+                    <div style="margin: auto;">
+                        Chapter
+                    </div>
+                </div>
+                <div id="researchPaper" onclick="fieldFormatting('researchPaper')" style="display: flex; align-items: center; cursor: pointer; height: 100px; width: 100px; background-color: aqua; border: 2px solid; border-radius: 10px; margin:0px 5px ;">
+                    <div style="text-align:center">
+                        Research Paper
+                    </div>
+                </div>
+                <br>
+                <div id="article" onclick="fieldFormatting('article')" style="display: flex; align-items: center; cursor: pointer; height: 100px; width: 100px; background-color: aqua; border: 2px solid; border-radius: 10px; margin:0px 5px ;">
+                    <div style="margin: auto;">
+                        Article
+                    </div>
+                </div>
+            </div> -->
+            
+            <!-- <div id="field"></div>
+        </fieldset> -->
+
+        {% for books in books %}
+            <p>{{books.id}} | {{books.title}} | {{books.userId}}</p>
+        {% endfor %}
+        
+        <table style="width: 100%; " id="myTable">
+            {% for i in range(0,10)  %}
+            
+            <tr style="border: 10px solid transparent;">
+                <td style="vertical-align: top; padding-left: 5px;">{{i+1}}.</td>
+                <td style="width: 83%;vertical-align: top;" id="ref{{i}}">
+                    <pre  style="padding: 10px; background-color: rgb(215, 247, 215) ; text-align: justify; border-radius: 5px; border: 2px solid green; " ><code id="myCode{{i}}" style="white-space: pre-wrap; font-size: 12px;">This is list item {{i+1}}</code> </pre>
+                </td>
+                <td style="width: 15%; position: relative; vertical-align: top;">
+                    <button id="copyBtn{{i}}" class="bg-transparent hover:bg-green-500 text-blue-700 font-semibold hover:text-white py-1 px-1 border border-green-500 hover:border-transparent rounded" style="width: max-content; margin-left: 5px;"  onclick="myFunc('copyBtn{{i}}')"><img src="static/clipBoard.png" style="height: 20px;" alt=""></button>
+                    
+                </td>
+            </tr>            
+            
+            {% endfor %}
+            
+            <!-- <tr>
+                <td style="vertical-align: top; padding-left: 5px;">2.</td>
+                <td style="width: 83%;vertical-align: top;" id="ref2">
+                    <pre  style="padding: 10px; background-color: lightgrey ; text-align: justify; border-radius: 5px; " ><code id="myCode" style="white-space: pre-wrap; font-size: 12px;">This is list item 2</code> </pre>
+                </td>
+                <td style="width: 15%; position: relative; vertical-align: top;">
+                    <button id="copyBtn2" class="bg-transparent hover:bg-green-500 text-blue-700 font-semibold hover:text-white py-1 px-1 border border-green-500 hover:border-transparent rounded" style="width: max-content; margin-left: 5px;"  onclick="myFunc('copyBtn2')"><img src="static/clipBoard.png" style="height: 30px;" alt=""></button>
+                    
+                </td>
+            </tr>     -->
+        </table>
+        <button id="printBtn" class="bg-transparent hover:bg-green-500 text-blue-700 font-semibold hover:text-white py-1 px-1 border border-green-500 hover:border-transparent rounded" onclick="docPrint()">Generate PDF</button>
+        <button id="copyAllBtn" class="bg-transparent hover:bg-green-500 text-blue-700 font-semibold hover:text-white py-1 px-1 border border-green-500 hover:border-transparent rounded" style="width: 100px;" onclick="copyAll()">Copy All</button>
+
+        <br>
+        <input type="text" style="width: 90%; border: solid;">
+    </div>
+    <form action="/logout" method="get">
+        <input type="submit" value="Log out" style="border: solid;">
+    </form>
+    <script>
+        
+        function fieldFormatting(type){
+            if(type=='book'){
+                let formForBook='<br><form action="" style="background-color: lightblue; width: 500px; padding: 30px;border: 2px solid;"><label for="bookName">Book Name: </label><input type="text" id="bookName"><br><br><label for="authorName">Authors name: </label><input type="text" id="authorName"><br><br><input type="submit" style="border: 1px solid; border-radius: 2px"></form>';
+                document.getElementById("field").innerHTML=formForBook;
+            }
+            else if(type=='chapter'){
+                let formForChapter='<br><form action="" style="background-color: lightgreen; width: 500px; padding: 30px; border: 2px solid;"><label for="chapterName">Chapter Name: </label><input type="text" id="chapterName"><br><br><label for="chapterAuthorName">Authors name: </label><input type="text" id="authorName"><br><br><input type="submit" style="border: 1px solid; border-radius: 2px"></form>';
+                document.getElementById("field").innerHTML=formForChapter;
+            }
+        }
+
+        document.getElementById("myForm").addEventListener("submit",function(event){
+            event.preventDefault();
+            let preText= document.getElementById("myInput").value;
+            document.getElementById("myCode1").innerHTML= preText;
+        } )
+
+        document.getElementById("radioCheck").addEventListener("submit",function(event){
+            event.preventDefault();
+            displayRadioValue();
+        } )
+
+        function displayRadioValue(){
+            let option= document.getElementsByName("documaentType");
+            console.log(option)
+        }
+
+        function myFunc(copyBtn){
+            let id= 'myCode'
+            id= id+ copyBtn[7]
+            console.log(id);
+            
+            let copyText= document.getElementById(id).innerHTML;
+            navigator.clipboard.writeText(copyText);
+            document.getElementById(copyBtn).innerHTML= '<img src="static/tick.png" style="height: 20px;" alt="">';
+
+            setTimeout(function (){
+                document.getElementById(copyBtn).innerHTML= '<img src="static/clipBoard.png" style="height: 20px;" alt="">';
+            },1000);
+            // alert(copyText);
+        }
+
+        // function docPrint(){
+        //     let code= document.getElementById("myTable")
+        //     let mywindow= window.open("","PRINT", "height=400, width= 400");
+        //     mywindow.document.write(code.innerHTML);
+        //     mywindow.document.close();
+        //     mywindow.focus();
+    
+        //     mywindow.print();
+        //     mywindow.close();
+        // }
+
+        function docPrint(){
+            let code= "";
+            let refID="";
+            // let i= 1;
+            // refID= "ref"+i.toString();
+            for(let i=0;i<10;i++)
+            {
+                index= i+1;
+                refID= "ref"+i.toString();
+                code=code+index.toString()+". "+document.getElementById(refID).innerText+"<br><br>";
+            }    
+
+            // navigator.clipboard.writeText(code);
+            // alert(document.getElementById(refID).innerText);
+            let mywindow= window.open("","PRINT", "height=800, width= 1400");
+            mywindow.document.write(code);
+            mywindow.document.close();
+            mywindow.focus();
+    
+            mywindow.print();
+            mywindow.close();
+        }
+
+        function copyAll(){
+            let code= "";
+            let refID="";
+            // let i= 1;
+            // refID= "ref"+i.toString();
+            for(let i=0;i<10;i++)
+            {
+                index= i+1;
+                refID= "ref"+i.toString();
+                code=code+index.toString()+". "+document.getElementById(refID).innerText+"\n";
+            }    
+
+            document.getElementById('copyAllBtn').innerHTML="Copied!"
+
+            setTimeout(function(){
+                document.getElementById('copyAllBtn').innerHTML="Copy All"
+            }, 1000)
+            navigator.clipboard.writeText(code);
+        }
+
+
+        
+    </script>
+</body>
+</html>
