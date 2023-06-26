@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./static/form.css">
+    <title>Books</title>
+</head>
+<body>
+    <nav class="navbar navbar-light " style="background-color: #50ff56ec">
+        <a class="navbar-brand" href="/dashboard"><b>Research Publication Formatting System</b></a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarNavDropdown"
+          aria-controls="navbarNavDropdown"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="/dashboard"><b>Dashboard</b></a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="/books"><b>Add Books</b></a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="/journalArticle"><b>Add Journal Articles</b></a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="/webpage"><b>Add Webpages</b></a>
+            </li>
+            <li class="nav-item active">
+              <form action="/logout" method="get">
+                  <input type="submit" value="Log out"/>
+              </form>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    <h1>Books</h1>
+    <div class="formContainer">
+    <form action="/bookadded" method="post">
+        <label for="title">Title:</label>
+        <input type="text" name="title" placeholder="title">
+        <br><br>
+        <label>Author 1:</label>
+        <input required type="text" name="author1fname" placeholder="author1 first name">
+        <input required type="text" name="author1lname" placeholder="author1 last name">
+        <br><br>
+        <label>Author 2:</label>
+        <input type="text" name="author2fname" placeholder="author2 first name">
+        <input type="text" name="author2lname" placeholder="author2 last name">
+        <br><br>
+        <label>Author 3:</label>
+        <input type="text" name="author3fname" placeholder="author3 first name">
+        <input type="text" name="author3lname" placeholder="author3 last name">
+        <br><br>
+        <label>Author 4:</label>
+        <input type="text" name="author4fname" placeholder="author4 first name">
+        <input type="text" name="author4lname" placeholder="author4 last name">
+        <br><br>
+        <label for="edition">Edition:</label>
+        <input type="number" name="edition" placeholder="edition">
+        <br><br>
+        <label for="volume">Volume:</label>
+        <input type="text" name="volume" placeholder="volume (eg. 1 or 1-5)">
+        <br><br>
+        <label for="dop">Date of Publishing:</label>
+        <div class="dateContainer">
+          <input required type="number" name="dd" placeholder="dd">&nbsp;_&nbsp;
+          <input required type="number" name="mm" placeholder="mm">&nbsp;_&nbsp;
+          <input required type="number" name="yyyy" placeholder="yyyy">
+        </div>
+        <br><br>
+        <label for="publisher">Publisher:</label>
+        <input required type="text" name="publisher" placeholder="publisher">
+        <br><br>
+        <label for="countryOfPublication">Country of Publication:</label>
+        <input type="text" name="countryOfPublication" placeholder="country of publication">
+        <br><br>
+        <label for="stateOfPublication">State of Publication:</label>
+        <input type="text" name="stateOfPublication" placeholder="state of publication">
+        <br><br>
+        <label for="cityOfPublication">City of Publication:</label>
+        <input required type="text" name="cityOfPublication" placeholder="city of publication">
+        <br><br>
+        <label for="doi">Database Object Identifier:</label>
+        <input type="text" name="doi" placeholder="doi">
+        <br><br>
+        <label for="url">URL:</label>
+        <input type="text" name="url" placeholder="url">
+        <br><br>
+        <label for="isbn">ISBN:</label>
+        <input type="number" name="isbn" placeholder="isbn">
+        <br><br>
+        <label for="issn">ISSN:</label>
+        <input type="number" name="issn" placeholder="issn">
+        <br><br>
+        <input type="submit" value="Submit">
+    </form>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+</body>
+</html>

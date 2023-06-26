@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link
+      href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="./static/dashboard.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-light " style="background-color: #50ff56ec">
+      <a class="navbar-brand" href="/dashboard"><b>Research Publication Formatting System</b></a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNavDropdown"
+        aria-controls="navbarNavDropdown"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="/dashboard"><b>Dashboard</b></a>
+            </li>
+          
+          <li class="nav-item active">
+            <a class="nav-link" href="/books"><b>Add Books</b></a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="/journalArticle"><b>Add Journal Articles</b></a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="/webpage"><b>Add Webpages</b></a>
+          </li>
+          <li class="nav-item active">
+            <form action="/logout" method="get">
+                <input type="submit" value="Log out"/>
+            </form>
+          </li>
+          
+        </ul>
+      </div>
+    </nav>
+    <div style="padding-top: 20px">
+    <div class="savedBooks">
+        <h5><b>Saved Books:</b></h5>
+        {% if not books %}
+            <p>You have no saved books</p>
+        {% endif %}
+        {% for book in books %}
+        <p> <b>{{loop.index}}.  {{book.title}} </b> &nbsp;&nbsp;&nbsp; <a href="/deleteBook/{{book.id}}"><button>Delete</button></a></p>
+        <p>
+            <b>APA :</b> {{book.author1lname}}, {{book.author1fname[0]}}
+            {% if not book.author2fname %}
+                .
+            {% elif not book.author3fname %}
+                & {{book.author2lname}}, {{book.author2fname[0]}}.
+            {% elif not book.author4fname %}
+                , {{book.author2lname}}, {{book.author2fname[0]}} & {{book.author3lname}}, {{book.author3fname[0]}}.
+            {% else %}
+                , {{book.author2lname}}, {{book.author2fname[0]}}, {{book.author3lname}}, {{book.author3fname[0]}} & {{book.author4lname}}, {{book.author4fname[0]}}.
+            {% endif %}
+            ({{book.dop.strftime('%Y')}}). {{book.title}}. {{book.publisher}}.
+        </p>
+        <p>
+            <b>MLA :</b> {{book.author1lname}}, {{book.author1fname}}
+            {% if not book.author2fname %}
+                .
+            {% elif not book.author3fname %}
+                , {{book.author2lname}}, {{book.author2fname}}.
+            {% elif not book.author4fname %}
+                , {{book.author2lname}}, {{book.author2fname}} , {{book.author3lname}}, {{book.author3fname}}.
+            {% else %}
+                , {{book.author2lname}}, {{book.author2fname}}, {{book.author3lname}}, {{book.author3fname}} , {{book.author4lname}}, {{book.author4fname}}.
+            {% endif %}
+            {{book.title}}. {{book.publisher}}. {{book.dop.strftime('%Y')}}
+        </p> 
+        <p>
+            <b>Chicago :</b> {{book.author1lname}}, {{book.author1fname}}
+            {% if not book.author2fname %}
+                .
+            {% elif not book.author3fname %}
+                , {{book.author2lname}}, {{book.author2fname}}.
+            {% elif not book.author4fname %}
+                , {{book.author2lname}}, {{book.author2fname}} , {{book.author3lname}}, {{book.author3fname}}.
+            {% else %}
+                , {{book.author2lname}}, {{book.author2fname}}, {{book.author3lname}}, {{book.author3fname}} , {{book.author4lname}}, {{book.author4fname}}.
+            {% endif %}
+            {{book.title}}. {{book.cityOfPublication}}:{{book.publisher}},{{book.dop.strftime('%Y')}}.
+        </p>  
+        <br>
+        {% endfor %}
+    </div>
+    <hr>
+    <div class="savedJournalArticle">
+        <h5><b>Saved Journal Articles:</b></h5>
+        {% if not journalArticles %}
+            <p>You have no saved journal articles</p>
+        {% endif %}
+        {% for journalArticle in journalArticles%}
+        <p>
+            <b>{{loop.index}}. {{journalArticle.title}}</b>  &nbsp;&nbsp;&nbsp; <a href="/deleteJournalArticle/{{journalArticle.id}}"><button>Delete</button></a>
+        </p>
+        <p>
+            <b>APA :</b> {{journalArticle.author1lname}}, {{journalArticle.author1fname[0]}}
+            {% if not journalArticle.author2fname %}
+                .
+            {% elif not journalArticle.author3fname %}
+                & {{journalArticle.author2lname}}, {{journalArticle.author2fname[0]}}.
+            {% elif not book.author4fname %}
+                , {{journalArticle.author2lname}}, {{journalArticle.author2fname[0]}} & {{journalArticle.author3lname}}, {{journalArticle.author3fname[0]}}.
+            {% else %}
+                , {{journalArticle.author2lname}}, {{journalArticle.author2fname[0]}}, {{journalArticle.author3lname}}, {{journalArticle.author3fname[0]}} & {{journalArticle.author4lname}}, {{journalArticle.author4fname[0]}}.
+            {% endif %}
+            ({{journalArticle.dop.strftime('%Y')}}). {{journalArticle.title}},{{journalArticle.name}} {{journalArticle.volume}}, pp. {{journalArticle.pageRange}}. 
+            {% if doi %}
+                DOI: {{journalArticle.doi}}
+            {% else %}
+                {{journalArticle.URL}}
+            {% endif %}
+        </p>
+        <p>
+            <b>MLA :</b> {{journalArticle.author1lname}}, {{journalArticle.author1fname}}
+            {% if not journalArticle.author2fname %}
+                .
+            {% elif not journalArticle.author3fname %}
+                , {{journalArticle.author2lname}}, {{journalArticle.author2fname}}.
+            {% elif not book.author4fname %}
+                , {{journalArticle.author2lname}}, {{journalArticle.author2fname}} , {{journalArticle.author3lname}}, {{journalArticle.author3fname}}.
+            {% else %}
+                , {{journalArticle.author2lname}}, {{journalArticle.author2fname}}, {{journalArticle.author3lname}}, {{journalArticle.author3fname}} , {{journalArticle.author4lname}}, {{journalArticle.author4fname}}.
+            {% endif %}
+            "{{journalArticle.title}}."{{journalArticle.name}},vol. {{journalArticle.volume}},{{journalArticle.dop.strftime('%Y')}}, pp. {{journalArticle.pageRange}}.
+            {% if doi %}
+                DOI: {{journalArticle.libDatabase}}.
+            {% else %}
+                {{journalArticle.URL}}.
+            {% endif %}
+        </p> 
+        <p>
+            <b>Chicago :</b> {{journalArticle.author1lname}}, {{journalArticle.author1fname}}
+            {% if not journalArticle.author2fname %}
+                .
+            {% elif not journalArticle.author3fname %}
+                , {{journalArticle.author2lname}}, {{journalArticle.author2fname}}.
+            {% elif not book.author4fname %}
+                , {{journalArticle.author2lname}}, {{journalArticle.author2fname}} , {{journalArticle.author3lname}}, {{journalArticle.author3fname}}.
+            {% else %}
+                , {{journalArticle.author2lname}}, {{journalArticle.author2fname}}, {{journalArticle.author3lname}}, {{journalArticle.author3fname}} , {{journalArticle.author4lname}}, {{journalArticle.author4fname}}.
+            {% endif %}
+            "{{journalArticle.title}}." {{journalArticle.volume}} ({{journalArticle.dop.strftime('%Y')}}): {{journalArticle.pageRange}}.
+            {% if doi %}
+                DOI: {{journalArticle.doi}}.
+            {% else %}
+                {{journalArticle.URL}}.
+            {% endif %}
+        </p>
+        <br>
+        {% endfor %}  
+    </div>
+    <hr>
+    <div class="savedWebpages">
+        <h5><b>Saved Webpages:</b></h5>
+        {% if not webpages %}
+            <p>You have no saved webpages</p>
+        {% endif %}
+        {% for webpage in webpages %}
+        <p> <b>{{loop.index}}. {{webpage.title}}</b> &nbsp;&nbsp;&nbsp; <a href="/deleteWebpage/{{webpage.id}}"><button>Delete</button></a></p>
+          <p>
+              <b>APA :</b> {{webpage.author1lname}}, {{webpage.author1fname[0]}}
+              {% if not webpage.author2fname %}
+                  .
+              {% elif not webpage.author3fname %}
+                  & {{webpage.author2lname}}, {{webpage.author2fname[0]}}.
+              {% elif not webpage.author4fname %}
+                  , {{webpage.author2lname}}, {{webpage.author2fname[0]}} & {{webpage.author3lname}}, {{webpage.author3fname[0]}}.
+              {% else %}
+                  , {{webpage.author2lname}}, {{webpage.author2fname[0]}}, {{webpage.author3lname}}, {{webpage.author3fname[0]}} & {{webpage.author4lname}}, {{webpage.author4fname[0]}}.
+              {% endif %}
+              (
+                {% if not webpage.dop %}
+                    n.d.
+                {% endif %}
+                {{webpage.dop.strftime('%Y')}}) 
+              {% if webpage.dop %}
+                .
+              {% endif %}
+              {{webpage.title}}. {{webpage.name}}. Retrieved from {{webpage.url}}
+          </p>
+          <p>
+                <b>MLA :</b> {{webpage.author1lname}}, {{webpage.author1fname}}
+                {% if not webpage.author2fname %}
+                    .
+                {% elif not webpage.author3fname %}
+                    , {{webpage.author2lname}}, {{webpage.author2fname[0]}}.
+                {% elif not webpage.author4fname %}
+                    , {{webpage.author2lname}}, {{webpage.author2fname[0]}} , {{webpage.author3lname}}, {{webpage.author3fname[0]}}.
+                {% else %}
+                    , {{webpage.author2lname}}, {{webpage.author2fname[0]}}, {{webpage.author3lname}}, {{webpage.author3fname[0]}} , {{webpage.author4lname}}, {{webpage.author4fname[0]}}
+                {% endif %}
+                "{{webpage.title}}". {{webpage.name}},
+                {% if not webpage.dop %}
+                    n.d.
+                {% endif %}
+                {{webpage.dop.strftime('%Y')}},{{webpage.url}}.
+          </p> 
+          <p>
+              <b>Chicago :</b> {{webpage.author1lname}}, {{webpage.author1fname}}
+              {% if not webpage.author2fname %}
+                  .
+              {% elif not webpage.author3fname %}
+                  , {{webpage.author2lname}}, {{webpage.author2fname[0]}}.
+              {% elif not webpage.author4fname %}
+                  , {{webpage.author2lname}}, {{webpage.author2fname[0]}} , {{webpage.author3lname}}, {{webpage.author3fname[0]}}.
+              {% else %}
+                  , {{webpage.author2lname}}, {{webpage.author2fname[0]}}, {{webpage.author3lname}}, {{webpage.author3fname[0]}} , {{webpage.author4lname}}, {{webpage.author4fname[0]}}
+              {% endif %}
+              "{{webpage.title}}". {{webpage.name}},
+              {% if not webpage.dop %}
+                  n.d.
+              {% endif %}
+              {% if webpage.dop.strftime('%m')== '01' %}
+                January
+              {% elif webpage.dop.strftime('%m')== '02' %}
+                Fabruary
+              {% elif webpage.dop.strftime('%m')== '03' %}
+                March
+              {% elif webpage.dop.strftime('%m')== '04' %}
+                April
+              {% elif webpage.dop.strftime('%m')== '05' %}
+                May
+              {% elif webpage.dop.strftime('%m')== '06' %}
+                June
+              {% elif webpage.dop.strftime('%m')== '07' %}
+                July
+              {% elif webpage.dop.strftime('%m')== '08' %}
+                August
+              {% elif webpage.dop.strftime('%m')== '09' %}
+                September
+              {% elif webpage.dop.strftime('%m')== '10' %}
+                October
+              {% elif webpage.dop.strftime('%m')== '11' %}
+                November
+              {% else %}
+                December
+              {% endif %}
+              {{webpage.dop.strftime('%d')}},
+              {{webpage.dop.strftime('%Y')}}. Accessed 
+              {% if webpage.doa.strftime('%m')== '01' %}
+                January
+              {% elif webpage.doa.strftime('%m')== '02' %}
+                Fabruary
+              {% elif webpage.doa.strftime('%m')== '03' %}
+                March
+              {% elif webpage.doa.strftime('%m')== '04' %}
+                April
+              {% elif webpage.doa.strftime('%m')== '05' %}
+                May
+              {% elif webpage.doa.strftime('%m')== '06' %}
+                June
+              {% elif webpage.doa.strftime('%m')== '07' %}
+                July
+              {% elif webpage.doa.strftime('%m')== '08' %}
+                August
+              {% elif webpage.doa.strftime('%m')== '09' %}
+                September
+              {% elif webpage.doa.strftime('%m')== '10' %}
+                October
+              {% elif webpage.doa.strftime('%m')== '11' %}
+                November
+              {% else %}
+                December
+              {% endif %}
+              {{webpage.doa.strftime('%d')}},
+              {{webpage.doa.strftime('%Y')}}.
+              {{webpage.url}}
+          </p>
+          <br>
+        {% endfor %}
+    </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
+</html>

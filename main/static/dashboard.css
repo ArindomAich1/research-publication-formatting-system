@@ -1,0 +1,66 @@
+input[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  input[type="submit"]:hover {
+    background-color: #45a049;
+  }
+
+  button{
+    background-color: #50ff56ec;
+    color: white;
+    padding: 5px 5px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+.navbar {
+    background-color: #50ff56ec;
+    padding: 10px;
+  }
+  
+  .navbar-brand {
+    font-weight: bold;
+    color: white;
+  }
+  
+  .navbar-nav .nav-link {
+    color: white;
+  }
+  
+  .navbar-toggler {
+    background-color: #ffffff;
+  }
+  
+  /* CSS for Saved Books, Journal Articles, and Webpages */
+  
+  .savedBooks,
+  .savedJournalArticle,
+  .savedWebpages {
+    padding-top: 20px;
+    padding-left: 10px;
+  }
+  
+  .savedBooks h5,
+  .savedJournalArticle h5,
+  .savedWebpages h5 {
+    font-weight: bold;
+  }
+  
+  .savedBooks p,
+  .savedJournalArticle p,
+  .savedWebpages p {
+    margin-bottom: 5px;
+  }
+
+  .savedJournalArticle{
+    background-color: aliceblue;
+  }
+  hr{
+    margin: 0;
+  }
